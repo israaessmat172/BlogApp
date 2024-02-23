@@ -1,0 +1,26 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "description": "Blog API using nodejs and mongodb",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "keywords": [
+    "Node",
+    "js",
+    "Express",
+    "js"
+  ],
+  "author": "Israa Essmat",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "latest": "^0.2.0",
+    "mongoose": "^8.1.3",
+    "nodejs": "0.0.0",
+    "nodemon": "^3.0.3"
+  }
+}
