@@ -9,20 +9,13 @@ require("./config/dbConnect");
 const app = express();
 
 //users route
-
 app.use("/api/v1/users", userRouter);
-
-//-------
 
 //posts route
 app.use("/api/v1/posts", postRouter);
 
-//------
-
 //comments route
 app.use("/api/v1/comments", commentRouter);
-
-//------
 
 //categories route
 app.use("/api/v1/categories", categoryRouter);
