@@ -4,8 +4,6 @@ const getTokenFromHeaders = (req) => {
 
   const token = headerObj["authorization"].split(" ")[1];
 
-  console.log(token);
-
   if (token !== undefined) {
     return token;
   } else {

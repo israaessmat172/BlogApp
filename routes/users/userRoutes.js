@@ -21,7 +21,7 @@ userRouter.post("/login", userLoginCtrl);
 userRouter.get("/", usersCtrl);
 
 //GET/api/v1/users/:id
-userRouter.get("/profile/:id", isLogin, userProfileCtrl);
+userRouter.get("/profile/", isLogin, userProfileCtrl);
 
 //DELETE/api/v1/users/:id
 userRouter.delete("/:id", deleteUserCtrl);
