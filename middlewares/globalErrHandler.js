@@ -9,9 +9,9 @@ const globalErrHandler = (err, req, res, next) => {
 
   //send the response
   res.status(statusCode).json({
+    message,
     stack,
     status,
-    message,
   });
 
   console.log(err.stack);
