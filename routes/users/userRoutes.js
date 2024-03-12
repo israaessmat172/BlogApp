@@ -37,6 +37,7 @@ userRouter.put("/:id", updateUserCtrl);
 //POST/api/v1/users/:id
 userRouter.post(
   "/profile-photo-upload",
+  isLogin,
   upload.single("profile"),
   profilePhotoUploadCtrl
 );
