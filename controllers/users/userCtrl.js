@@ -119,6 +119,18 @@ const updateUserCtrl = async (req, res) => {
     res.json(error.message);
   }
 };
+
+//Profile Photo Upload
+const profilePhotoUploadCtrl = async (req, res) => {
+  try {
+    res.json({
+      status: "success",
+      data: "profile photo upload",
+    });
+  } catch (error) {
+    res.json(error.message);
+  }
+};
 module.exports = {
   userRegisterCtrl,
   userLoginCtrl,
@@ -126,4 +138,5 @@ module.exports = {
   userProfileCtrl,
   deleteUserCtrl,
   updateUserCtrl,
+  profilePhotoUploadCtrl,
 };
