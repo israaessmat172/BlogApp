@@ -8,6 +8,7 @@ const {
   updateUserCtrl,
   profilePhotoUploadCtrl,
   whoViewedMyProfileCtrl,
+  followingCtrl,
 } = require("../../controllers/users/userCtrl");
 const isLogin = require("../../middlewares/isLogin");
 const storage = require("../../config/cloudinary");
@@ -37,6 +38,9 @@ userRouter.put("/:id", updateUserCtrl);
 
 //GET/api/v1/users/profile-viewers/:id
 userRouter.get("/profile-viewers/:id", isLogin, whoViewedMyProfileCtrl);
+
+//GET/api/v1/users/following/:id
+userRouter.get("/following/:id", isLogin, followingCtrl);
 
 //POST/api/v1/users/:id
 userRouter.post(
