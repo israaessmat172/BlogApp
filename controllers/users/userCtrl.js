@@ -128,10 +128,6 @@ const followingCtrl = async (req, res, next) => {
         });
       }
     }
-    res.json({
-      status: "success",
-      data: "following",
-    });
   } catch (error) {
     res.json(error.message);
   }
@@ -169,10 +165,34 @@ const unFollowCtrl = async (req, res, next) => {
         });
       }
     }
-    res.json({
-      status: "success",
-      data: "following",
-    });
+  } catch (error) {
+    res.json(error.message);
+  }
+};
+
+//blocked
+const blockUserCtrl = async (req, res, next) => {
+  try {
+    const userToBeBlocked = await User.findById(req.params.id);
+
+    const userWhoBlocked = await User.findById(req.userAuth);
+
+    if (userWhoBlocked && userToBeBlocked) {
+      const isUserAlreadyBlocked = userWhoBlocked.blocked.find(
+        (blocked) => blocked.toString() === userToBeBlocked._id.toString()
+      );
+      if (isUserAlreadyBlocked) {
+        return next(appErr("You already blocked this user"));
+      } else {
+        userWhoBlocked.blocked.push(userToBeBlocked._id);
+
+        await userWhoBlocked.save();
+        res.json({
+          status: "success",
+          data: "You have successfully blocked this user",
+        });
+      }
+    }
   } catch (error) {
     res.json(error.message);
   }
@@ -270,4 +290,5 @@ module.exports = {
   whoViewedMyProfileCtrl,
   followingCtrl,
   unFollowCtrl,
+  blockUserCtrl,
 };
