@@ -17,6 +17,7 @@ const {
 const isLogin = require("../../middlewares/isLogin");
 const storage = require("../../config/cloudinary");
 const multer = require("multer");
+const isAdmin = require("../../middlewares/isAdmin");
 const userRouter = express.Router();
 
 //instance of multer
@@ -56,7 +57,7 @@ userRouter.get("/block/:id", isLogin, blockUserCtrl);
 userRouter.get("/unblock/:id", isLogin, unblockUserCtrl);
 
 //GET/api/v1/users/admin-block/:id
-userRouter.put("/admin-block/:id", isLogin, adminBlockUserCtrl);
+userRouter.put("/admin-block/:id", isLogin, isAdmin, adminBlockUserCtrl);
 
 //POST/api/v1/users/:id
 userRouter.post(

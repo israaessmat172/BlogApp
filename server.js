@@ -4,11 +4,13 @@ const postRouter = require("./routes/posts/postRoutes");
 const commentRouter = require("./routes/comments/commentRoutes");
 const categoryRouter = require("./routes/categories/categoryRoutes");
 const globalErrHandler = require("./middlewares/globalErrHandler");
+const isAdmin = require("./middlewares/isAdmin");
 require("dotenv").config();
 require("./config/dbConnect");
 
 const app = express();
 
+app.use(isAdmin);
 //middlewares
 app.use(express.json());
 
