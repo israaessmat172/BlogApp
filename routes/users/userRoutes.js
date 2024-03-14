@@ -13,6 +13,7 @@ const {
   blockUserCtrl,
   unblockUserCtrl,
   adminBlockUserCtrl,
+  adminUnblockUserCtrl,
 } = require("../../controllers/users/userCtrl");
 const isLogin = require("../../middlewares/isLogin");
 const storage = require("../../config/cloudinary");
@@ -56,8 +57,11 @@ userRouter.get("/block/:id", isLogin, blockUserCtrl);
 //GET/api/v1/users/unblock/:id
 userRouter.get("/unblock/:id", isLogin, unblockUserCtrl);
 
-//GET/api/v1/users/admin-block/:id
+//PUT/api/v1/users/admin-block/:id
 userRouter.put("/admin-block/:id", isLogin, isAdmin, adminBlockUserCtrl);
+
+//PUT/api/v1/users/admin-unblock/:id
+userRouter.put("/admin-unblock/:id", isLogin, isAdmin, adminUnblockUserCtrl);
 
 //POST/api/v1/users/:id
 userRouter.post(
