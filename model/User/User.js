@@ -88,6 +88,36 @@ userSchema.virtual("fullname").get(function () {
   return `${this.firstname} ${this.lastname}`;
 });
 
+//Get user initials
+userSchema.virtual("initials").get(function () {
+  return `${this.firstname[0]}${this.lastname[0]}`;
+});
+
+//Get posts count
+userSchema.virtual("postCounts").get(function () {
+  return this.posts.length;
+});
+
+//Get followers count
+userSchema.virtual("followersCount").get(function () {
+  return this.followers.length;
+});
+
+//Get following count
+userSchema.virtual("followingCount").get(function () {
+  return this.following.length;
+});
+
+//Get viewers count
+userSchema.virtual("viewersCount").get(function () {
+  return this.viewers.length;
+});
+
+//Get blocked count
+userSchema.virtual("blockedCount").get(function () {
+  return this.blocked.length;
+});
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

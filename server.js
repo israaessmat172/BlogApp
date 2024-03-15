@@ -10,7 +10,7 @@ require("./config/dbConnect");
 
 const app = express();
 
-app.use(isAdmin);
+// app.use(isAdmin);
 //middlewares
 app.use(express.json());
 
