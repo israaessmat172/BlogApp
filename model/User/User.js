@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const Post = require("../Post/Post");
 
 const userSchema = new mongoose.Schema(
   {
@@ -81,6 +82,30 @@ const userSchema = new mongoose.Schema(
     toJSON: { virtuals: true },
   }
 );
+
+//Hooks
+//pre-before record is saved
+userSchema.pre("findOne", async function (next) {
+  const userId = this._conditions._id;
+
+  const posts = await Post.find({ user: userId });
+
+  const lastPost = posts[posts.length - 1];
+
+  const lastPostDate = new Date(lastPost.createdAt);
+
+  const lastPostDateStr = lastPostDate.toDateString();
+
+  userSchema.virtual("lastPostDate").get(function () {
+    return lastPostDateStr;
+  });
+  next();
+});
+
+// //post- after saving
+// userSchema.post("save", function (next) {
+//   console.log("Post hook");
+// });
 
 //Get fullname
 userSchema.virtual("fullname").get(function () {
