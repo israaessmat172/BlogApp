@@ -14,6 +14,7 @@ const {
   unblockUserCtrl,
   adminBlockUserCtrl,
   adminUnblockUserCtrl,
+  updatePasswordCtrl,
 } = require("../../controllers/users/userCtrl");
 const isLogin = require("../../middlewares/isLogin");
 const storage = require("../../config/cloudinary");
@@ -41,6 +42,9 @@ userRouter.delete("/:id", deleteUserCtrl);
 
 //PUT/api/v1/users/:id
 userRouter.put("/", isLogin, updateUserCtrl);
+
+//PUT/api/v1/users/update-password
+userRouter.put("/update-password", isLogin, updatePasswordCtrl);
 
 //GET/api/v1/users/profile-viewers/:id
 userRouter.get("/profile-viewers/:id", isLogin, whoViewedMyProfileCtrl);
