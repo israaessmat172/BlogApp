@@ -40,7 +40,7 @@ userRouter.get("/profile/", isLogin, userProfileCtrl);
 userRouter.delete("/:id", deleteUserCtrl);
 
 //PUT/api/v1/users/:id
-userRouter.put("/:id", updateUserCtrl);
+userRouter.put("/", isLogin, updateUserCtrl);
 
 //GET/api/v1/users/profile-viewers/:id
 userRouter.get("/profile-viewers/:id", isLogin, whoViewedMyProfileCtrl);

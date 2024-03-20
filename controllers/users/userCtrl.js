@@ -310,6 +310,40 @@ const deleteUserCtrl = async (req, res) => {
 
 //update
 const updateUserCtrl = async (req, res) => {
+  const { email, lastname, firstname } = req.body;
+  try {
+    //Check if email is not taken
+    if (email) {
+      const emailTaken = await User.findOne({ email });
+      if (emailTaken) {
+        return next(appErr("Email is taken", 400));
+      }
+    }
+    //update the user
+    const user = await User.findByIdAndUpdate(
+      req.userAuth,
+      {
+        lastname,
+        firstname,
+        email,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    res.json({
+      status: "success",
+      data: user,
+    });
+  } catch (error) {
+    res.json(error.message);
+  }
+};
+
+//update password
+const updatePasswordCtrl = async (req, res) => {
   try {
     res.json({
       status: "success",

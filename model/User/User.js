@@ -86,13 +86,14 @@ const userSchema = new mongoose.Schema(
 //Hooks
 //pre-before record is saved
 userSchema.pre("findOne", async function (next) {
+  this.populate({ path: "posts" });
   const userId = this._conditions._id;
 
   const posts = await Post.find({ user: userId });
 
   const lastPost = posts[posts.length - 1];
 
-  const lastPostDate = new Date(lastPost.createdAt);
+  const lastPostDate = new Date(lastPost?.createdAt);
 
   const lastPostDateStr = lastPostDate.toDateString();
 
