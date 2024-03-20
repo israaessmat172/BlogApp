@@ -148,6 +148,29 @@ userSchema.pre("findOne", async function (next) {
       return `${daysAgo} days ago`;
     }
   });
+
+  const numberOfPosts = posts.length;
+  //check if number of posts is less than 10
+  if (numberOfPosts < 10) {
+    await User.findByIdAndUpdate(
+      userId,
+      { userAward: "Bronze" },
+      { new: true }
+    );
+  }
+  //check if number of posts is greater than 10
+  if (numberOfPosts > 10) {
+    await User.findByIdAndUpdate(
+      userId,
+      { userAward: "Silver" },
+      { new: true }
+    );
+  }
+
+  //check if number of posts is greater than 20
+  if (numberOfPosts > 20) {
+    await User.findByIdAndUpdate(userId, { userAward: "Gold" }, { new: true });
+  }
   next();
 });
 
