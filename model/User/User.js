@@ -110,10 +110,29 @@ userSchema.pre("findOne", async function (next) {
     userSchema.virtual("isInactive").get(function () {
       return true;
     });
+
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        isBlocked: true,
+      },
+      {
+        new: true,
+      }
+    );
   } else {
     userSchema.virtual("isInactive").get(function () {
       return false;
     });
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        isBlocked: false,
+      },
+      {
+        new: true,
+      }
+    );
   }
   next();
 });
