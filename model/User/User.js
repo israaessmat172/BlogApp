@@ -134,6 +134,20 @@ userSchema.pre("findOne", async function (next) {
       }
     );
   }
+
+  const daysAgo = Math.floor(diffInDays);
+
+  userSchema.virtual("lastActive").get(function () {
+    if (daysAgo <= 0) {
+      return "Today";
+    }
+    if (daysAgo === 1) {
+      return "Yesterday";
+    }
+    if (daysAgo > 1) {
+      return `${daysAgo} days ago`;
+    }
+  });
   next();
 });
 
