@@ -99,6 +99,22 @@ userSchema.pre("findOne", async function (next) {
   userSchema.virtual("lastPostDate").get(function () {
     return lastPostDateStr;
   });
+
+  const currentDate = new Date();
+
+  const diff = currentDate - lastPostDate;
+
+  const diffInDays = diff / (1000 * 3600 * 24);
+
+  if (diffInDays > 30) {
+    userSchema.virtual("isInactive").get(function () {
+      return true;
+    });
+  } else {
+    userSchema.virtual("isInactive").get(function () {
+      return false;
+    });
+  }
   next();
 });
 
