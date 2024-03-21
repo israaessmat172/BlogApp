@@ -2,7 +2,7 @@ const Post = require("../../model/Post/Post");
 const User = require("../../model/User/User");
 
 //Create post
-const createPostCtrl = async (req, res) => {
+const createPostCtrl = async (req, res, next) => {
   const { title, description } = req.body;
   try {
     const author = await User.findById(req.userAuth);
@@ -20,7 +20,7 @@ const createPostCtrl = async (req, res) => {
       data: postCreated,
     });
   } catch (error) {
-    res.json(error.message);
+    next(appErr(error.message));
   }
 };
 
