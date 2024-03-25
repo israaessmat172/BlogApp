@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 const {
   createPostCtrl,
   postUserCtrl,
@@ -9,11 +10,14 @@ const {
   toggleDisLikesPostCtrl,
 } = require("../../controllers/posts/postCtrl");
 const isLogin = require("../../middlewares/isLogin");
+const storage = require("../../config/cloudinary");
 
 const postRouter = express.Router();
 
+const upload = multer({ storage });
+
 //POST/api/v1/posts
-postRouter.post("/", isLogin, createPostCtrl);
+postRouter.post("/", isLogin, upload.single("image"), createPostCtrl);
 
 //GET/api/v1/posts/:id
 postRouter.get("/:id", postUserCtrl);

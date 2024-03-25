@@ -41,13 +41,39 @@ const postSchema = new mongoose.Schema(
     },
     photo: {
       type: String,
-      // required: [true, "Post Image is required"],
+      required: [true, "Post Image is required"],
     },
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
   }
 );
+
+postSchema.pre(/^find/, function (next) {
+  postSchema.virtual("likesCount").get(function () {
+    const post = this;
+    return post.likes.length;
+  });
+
+  postSchema.virtual("dislikesCount").get(function () {
+    const post = this;
+    return post.dislikes.length;
+  });
+  postSchema.virtual;
+  //if days is less is 0 return today if days is 1 return yesterday else return days ago
+  postSchema.virtual("daysAgo").get(function () {
+    const post = this;
+    const date = new Date(post.createdAt);
+    const daysAgo = Math.floor((Date.now() - date) / 86400000);
+    return daysAgo === 0
+      ? "Today"
+      : daysAgo === 1
+      ? "Yesterday"
+      : `${daysAgo} days ago`;
+  });
+  next();
+});
 
 const Post = mongoose.model("Post", postSchema);
 

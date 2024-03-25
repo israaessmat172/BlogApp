@@ -17,6 +17,7 @@ const createPostCtrl = async (req, res, next) => {
       description,
       user: author._id,
       category,
+      photo: req?.file?.path,
     });
 
     author.posts.push(postCreated);
