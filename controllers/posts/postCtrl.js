@@ -106,22 +106,42 @@ const postsCtrl = async (req, res) => {
   }
 };
 
-const deletePostCtrl = async (req, res) => {
+const deletePostCtrl = async (req, res, next) => {
   try {
+    const post = await Post.findById(req.params.id);
+    if (post.user.toString() !== req.userAuth.toString()) {
+      return next(appErr("You are not allowed to delete this post", 403));
+    }
+    await Post.findByIdAndDelete(req.params.id);
     res.json({
       status: "success",
-      data: "delete post route",
+      data: "Post deleted successfully",
     });
   } catch (error) {
     res.json(error.message);
   }
 };
 
-const updatePostCtrl = async (req, res) => {
+const updatePostCtrl = async (req, res, next) => {
+  const { title, description, category } = req.body;
   try {
+    const post = await Post.findById(req.params.id);
+    if (post.user.toString() !== req.userAuth.toString()) {
+      return next(appErr("You are not allowed to update this post", 403));
+    }
+    await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        title,
+        description,
+        category,
+        photo: req?.file?.path,
+      },
+      { new: true }
+    );
     res.json({
       status: "success",
-      data: "update post route",
+      data: post,
     });
   } catch (error) {
     res.json(error.message);

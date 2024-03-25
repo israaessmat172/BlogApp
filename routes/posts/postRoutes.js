@@ -32,8 +32,8 @@ postRouter.get("/dislikes/:id", isLogin, toggleDisLikesPostCtrl);
 postRouter.get("/", postsCtrl);
 
 //DELETE/api/v1/comments/:id
-postRouter.delete("/:id", deletePostCtrl);
+postRouter.delete("/:id", isLogin, deletePostCtrl);
 
 //PUT/api/v1/posts/:id
-postRouter.put("/:id", updatePostCtrl);
+postRouter.put("/:id", isLogin, upload.single("image"), updatePostCtrl);
 module.exports = postRouter;
