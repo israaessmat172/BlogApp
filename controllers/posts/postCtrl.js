@@ -32,7 +32,7 @@ const createPostCtrl = async (req, res, next) => {
 };
 
 //single post
-const postUserCtrl = async (req, res) => {
+const postUserCtrl = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
     res.json({
@@ -40,12 +40,12 @@ const postUserCtrl = async (req, res) => {
       data: post,
     });
   } catch (error) {
-    res.json(error.message);
+    next(appErr(error.message));
   }
 };
 
 //toggle like
-const toggleLikesPostCtrl = async (req, res) => {
+const toggleLikesPostCtrl = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
 
@@ -65,12 +65,12 @@ const toggleLikesPostCtrl = async (req, res) => {
       data: post,
     });
   } catch (error) {
-    res.json(error.message);
+    next(appErr(error.message));
   }
 };
 
 //toggle dislike
-const toggleDisLikesPostCtrl = async (req, res) => {
+const toggleDisLikesPostCtrl = async (req, res, next) => {
   try {
     const post = await Post.findById(req.params.id);
 
@@ -90,11 +90,11 @@ const toggleDisLikesPostCtrl = async (req, res) => {
       data: post,
     });
   } catch (error) {
-    res.json(error.message);
+    next(appErr(error.message));
   }
 };
 
-const postsCtrl = async (req, res) => {
+const postsCtrl = async (req, res, next) => {
   try {
     const posts = await Post.find();
     res.json({
@@ -102,7 +102,7 @@ const postsCtrl = async (req, res) => {
       data: posts,
     });
   } catch (error) {
-    res.json(error.message);
+    next(appErr(error.message));
   }
 };
 
@@ -118,7 +118,7 @@ const deletePostCtrl = async (req, res, next) => {
       data: "Post deleted successfully",
     });
   } catch (error) {
-    res.json(error.message);
+    next(appErr(error.message));
   }
 };
 
@@ -144,7 +144,7 @@ const updatePostCtrl = async (req, res, next) => {
       data: post,
     });
   } catch (error) {
-    res.json(error.message);
+    next(appErr(error.message));
   }
 };
 
