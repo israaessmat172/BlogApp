@@ -68,7 +68,7 @@ Welcome to the Nodejs Blog Application! This is a feature-rich blogging platform
 1. Run the application:
 
 ```bash
-   npm start
+   npm run server
 ```
 
 2. Access the API endpoints using tools like Thunder Client, Postman, or curl.
@@ -83,5 +83,6 @@ Welcome to the Nodejs Blog Application! This is a feature-rich blogging platform
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Deployment
+You can visit my app using this link
+[Blog App](https://blogapp-ecv2.onrender.com)
